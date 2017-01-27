@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="workflow">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="constructiontype" type="xs:string"
+					minOccurs="1" maxOccurs="1" />
+				<xs:element name="name" type="xs:string" minOccurs="1"
+					maxOccurs="1" />
+				<xs:element name="id" type="xs:string" minOccurs="1"
+					maxOccurs="1" />
+				<xs:element name="description" type="xs:string"
+					minOccurs="1" maxOccurs="1" />
+				<xs:element ref="milestone" minOccurs="1" maxOccurs="unbounded" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="milestone">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="name" type="xs:string" minOccurs="1"
+					maxOccurs="1" />
+				<xs:element name="id" type="xs:string" minOccurs="1"
+					maxOccurs="1" />
+				<xs:element name="description" type="xs:string"
+					minOccurs="1" maxOccurs="1" />
+				<xs:element ref="task" minOccurs="1" maxOccurs="unbounded" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="task">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="name" type="xs:string" minOccurs="1"
+					maxOccurs="1" />
+				<xs:element name="id" type="xs:string" minOccurs="1"
+					maxOccurs="1" />
+				<xs:element name="description" type="xs:string"
+					minOccurs="1" maxOccurs="1" />
+				<xs:element name="tasktype" type="tasktype" minOccurs="1"
+					maxOccurs="1" />
+				<xs:element name="uibean" type="uiBean" minOccurs="0" maxOccurs="1" />
+				<xs:element name="endpoint" type="endPoint" minOccurs="0"
+					maxOccurs="1" />
+				<xs:element name="successorid" type="xs:string"
+					minOccurs="1" maxOccurs="1" />
+				<xs:element name="predecessorid" type="xs:string"
+					minOccurs="1" maxOccurs="1" />
+				<xs:element name="sla-exec" type="xs:string" minOccurs="0"
+					maxOccurs="1" />
+				<xs:element name="sla-metrics" type="xs:string"
+					minOccurs="0" maxOccurs="1" />
+				<xs:element name="sla-pickup-min" type="xs:string"
+					minOccurs="0" maxOccurs="1" />
+				<xs:element name="phase-id" type="xs:string" minOccurs="1"
+					maxOccurs="1" />
+				<xs:element name="queue-id" type="xs:string" minOccurs="1"
+					maxOccurs="1" />
+
+				<xs:element ref="subtask" minOccurs="1" maxOccurs="unbounded" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="subtask">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="name" type="xs:string" minOccurs="1"
+					maxOccurs="1" />
+				<xs:element name="id" type="xs:string" minOccurs="1"
+					maxOccurs="1" />
+				<xs:element name="description" type="xs:string"
+					minOccurs="1" maxOccurs="1" />
+				<xs:element name="subtasktype" type="tasktype" minOccurs="1"
+					maxOccurs="1" />
+				<xs:element name="uibean" type="uiBean" minOccurs="0"
+					maxOccurs="1" />
+				<xs:element name="endpoint" type="endPoint" minOccurs="0"
+					maxOccurs="1" />
+				<xs:element name="successorid" type="xs:string"
+					minOccurs="1" maxOccurs="1" />
+				<xs:element name="predecessorid" type="xs:string"
+					minOccurs="1" maxOccurs="1" />
+				<xs:element name="sla-exec" type="xs:string" minOccurs="0"
+					maxOccurs="1" />
+				<xs:element name="sla-metrics" type="xs:string"
+					minOccurs="0" maxOccurs="1" />
+				<xs:element name="sla-pickup-min" type="xs:string"
+					minOccurs="0" maxOccurs="1" />
+				<xs:element name="phase-id" type="xs:string" minOccurs="1"
+					maxOccurs="1" />
+				<xs:element name="queue-id" type="xs:string" minOccurs="1"
+					maxOccurs="1" />
+				<xs:element name="concurrent" type="xs:boolean"
+					minOccurs="1" maxOccurs="1" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:simpleType name="tasktype">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="HUMAN" />
+			<xs:enumeration value="SYSTEM" />
+			<xs:enumeration value="EVENT" />
+			<xs:enumeration value="EMAIL" />
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<xs:simpleType name="uiBean">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="com.immco.survey.SurveyUI" />
+			<xs:enumeration value="com.immco.survey.EstimatePopup" />
+			<xs:enumeration value="com.immco.survey.WalkoutUI" />
+			<xs:enumeration value="com.immco.survey.RoiUI" />
+		</xs:restriction>
+	</xs:simpleType>
+	
+		<xs:simpleType name="endPoint">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="/surveyComplete" />
+			<xs:enumeration value="/estimateComplete" />
+			<xs:enumeration value="/estimateSupApprove" />
+			<xs:enumeration value="/walkoutComplete" />
+			<xs:enumeration value="/designComplete" />
+			<xs:enumeration value="/permitComplete" />
+		</xs:restriction>
+	</xs:simpleType>
+	
+</xs:schema>

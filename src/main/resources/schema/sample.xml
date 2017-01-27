@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="routing.xsd">
+	<constructiontype>SMB COAX</constructiontype>
+	<name>SMB_COAX_WF_1</name>
+	<id>SMB_COAX_WF_1</id>
+	<description>Workflow for SMB Coax</description>
+	<milestone>
+		<name>M1</name>
+		<id>M1</id>
+		<description>MILESTONE-1</description>
+		<task>
+			<name>SURVEY</name>
+			<id>S-1</id>
+			<description>DO SURVEY</description>
+			<tasktype>HUMAN</tasktype>
+			<uibean>com.immco.survey.SurveyUI</uibean>
+			<endpoint>/surveyComplete</endpoint>
+			<successorid></successorid>
+			<predecessorid></predecessorid>
+			<sla-exec>10</sla-exec>
+			<sla-metrics>0</sla-metrics>
+			<sla-pickup-min></sla-pickup-min>
+			<phase-id>SERVICEABILITY</phase-id>
+			<queue-id>SURVEY</queue-id>
+			<subtask>
+				<name>ESTIMATE</name>
+				<id>S-1-E-1</id>
+				<description>DO ESTIMATE</description>
+				<subtasktype>HUMAN</subtasktype>
+				<uibean>com.immco.survey.EstimatePopup</uibean>
+				<endpoint>/estimateComplete</endpoint>
+				<successorid>S-1-E-2</successorid>
+				<predecessorid></predecessorid>
+				<sla-exec></sla-exec>
+				<sla-metrics></sla-metrics>
+				<sla-pickup-min></sla-pickup-min>
+				<phase-id>SERVICEABILITY</phase-id>
+				<queue-id>SURVEY</queue-id>
+				<concurrent>false</concurrent>
+			</subtask>
+			<subtask>
+				<name>ESTIMATE-SUP-APPROVE</name>
+				<id>S-1-E-2</id>
+				<description>APPROVE ESTIMATE BY SUPERVISOR</description>
+				<subtasktype>HUMAN</subtasktype>
+				<endpoint>/estimateSupApprove</endpoint>
+				<successorid></successorid>
+				<predecessorid>S-1-E-1</predecessorid>
+				<sla-exec></sla-exec>
+				<sla-metrics></sla-metrics>
+				<sla-pickup-min></sla-pickup-min>
+				<phase-id>SERVICEABILITY</phase-id>
+				<queue-id>SURVEY</queue-id>
+				<concurrent>false</concurrent>
+			</subtask>
+		</task>
+	</milestone>
+
+	<milestone>
+		<name>M2</name>
+		<id>M2</id>
+		<description>MILESTONE-2</description>
+		<task>
+			<name>WALKOUT</name>
+			<id>W-1</id>
+			<description>DO WALKOUT</description>
+			<tasktype>HUMAN</tasktype>
+			<uibean>com.immco.survey.WalkoutUI</uibean>
+			<endpoint>/walkoutComplete</endpoint>
+			<successorid></successorid>
+			<predecessorid></predecessorid>
+			<sla-exec>35</sla-exec>
+			<sla-metrics>0</sla-metrics>
+			<sla-pickup-min></sla-pickup-min>
+			<phase-id>SERVICEABILITY</phase-id>
+			<queue-id>WALKOUT</queue-id>
+			<subtask>
+				<name>ESTIMATE</name>
+				<id>W-1-E-1</id>
+				<description>DO ESTIMATE REVISION</description>
+				<subtasktype>HUMAN</subtasktype>
+				<uibean>com.immco.survey.EstimatePopup</uibean>
+				<endpoint>/estimateComplete</endpoint>
+				<successorid></successorid>
+				<predecessorid></predecessorid>
+				<sla-exec></sla-exec>
+				<sla-metrics></sla-metrics>
+				<sla-pickup-min></sla-pickup-min>
+				<phase-id>SERVICEABILITY</phase-id>
+				<queue-id>WALKOUT</queue-id>
+				<concurrent>false</concurrent>
+			</subtask>
+		</task>
+	</milestone>
+</workflow>	
+	
